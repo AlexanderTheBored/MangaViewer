@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MangaView</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="reader.css">
+</head>
+
+<body class="bg-white text-gray-900">
+  <!-- Loading Spinner -->
+  <div id="loading-spinner" class="loading-spinner">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-opacity-75"></div>
+    <p class="mt-4 text-center">Loading manga collection...</p>
+  </div>
+
+  <!-- Header -->
+  <div id="header-container"></div>
+
+  <!-- Intro Modal -->
+  <div id="introModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-8 rounded-lg max-w-md w-full text-center">
+      <h2 class="text-xl font-bold mb-4">Welcome to MangaView!</h2>
+      <p class="mb-6">Explore your favorite manga with ease and enjoy a seamless reading experience. Dive into the world of manga with us!</p>
+      <button id="closeModal" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="pt-[min(120px,15vw)] px-4" id="main-content" style="display: none;">
+    <!-- Featured Manga Carousel -->
+    <section class="mb-8 relative h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
+      <div id="featured-carousel" class="h-full w-full relative">
+        <!-- Featured slides will be inserted here -->
+      </div>
+      <div id="featured-indicators" class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+        <!-- Indicators will be inserted here -->
+      </div>
+    </section>
+
+    <!-- Search and Sort Controls -->
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+      <div class="w-full sm:w-64">
+        <input type="text" id="search-input" placeholder="Search manga..." 
+               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div class="flex gap-2 w-full sm:w-auto">
+        <select id="genre-filter" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">All Genres</option>
+          <option value="action">Action</option>
+          <option value="adventure">Adventure</option>
+          <option value="comedy">Comedy</option>
+          <option value="drama">Drama</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="horror">Horror</option>
+          <option value="romance">Romance</option>
+          <option value="sci-fi">Sci-Fi</option>
+        </select>
+        <select id="sort-select" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="popular">Popular</option>
+          <option value="latest">Latest</option>
+          <option value="rating">Rating</option>
+          <option value="title-asc">Title (A-Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Manga Grid Section -->
+    <section>
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">Popular Manga</h2>
+        <div class="text-sm text-gray-500" id="manga-count">Loading...</div>
+      </div>
+      
+      <div id="manga-grid" class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"></div>
+
+      <!-- Pagination -->
+      <div class="flex justify-center items-center gap-4 mt-10">
+        <button id="prev-page" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition disabled:opacity-50" disabled>Prev</button>
+        <span id="page-indicator" class="text-lg font-medium">Page 1</span>
+        <button id="next-page" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition disabled:opacity-50">Next</button>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="mt-16 mb-8 bg-blue-50 rounded-xl p-6">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-2">Stay Updated</h2>
+        <p class="mb-4 text-gray-600">Subscribe to our newsletter to get the latest manga updates directly to your inbox.</p>
+        <div class="flex flex-col sm:flex-row gap-2 justify-center">
+          <input type="email" placeholder="Your email address" 
+                 class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow max-w-md">
+          <button class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-8 mt-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <h3 class="text-xl font-bold">MangaView</h3>
+          <p class="text-gray-600">Your gateway to manga world</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="#" class="text-gray-700 hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-gray-700 hover:text-blue-500"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-gray-700 hover:text-blue-500"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-gray-700 hover:text-blue-500"><i class="fab fa-discord"></i></a>
+        </div>
+      </div>
+      <div class="mt-6 text-center text-gray-500 text-sm">
+        <p>© 2023 MangaView. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Files -->
+  <script src="manga-data.js"></script>
+  <script src="reader.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
