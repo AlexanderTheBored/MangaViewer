@@ -1,0 +1,13 @@
+project/
+├── index.html
+├── css/
+│   ├── main.css
+│   ├── reader.css
+├── js/
+│   ├── main.js
+│   ├── reader.js
+│   ├── manga-data.js
+├── partials/
+│   ├── header.html
+│   ├── footer.html
+│   ├── intro-modal.html
